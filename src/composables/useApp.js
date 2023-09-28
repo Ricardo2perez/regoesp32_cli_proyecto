@@ -6,6 +6,7 @@ const progress = ref({ type: "update", msg: "0" });
 const index_update = ref({});
 const mqtt_activity = ref({});
 const temperature_update = ref({});
+const ajustesth_update = ref({});
 const salidas_update = ref({});
 // Time
 const time_update = ref();
@@ -148,7 +149,16 @@ const useApp = () => {
             ) {
                 temperature_update.value = resp;
                 console.log(resp);
-            } else if (
+            }
+            else if (
+                Object.keys(resp).length > 0 &&
+                resp.type == "regulacion" &&
+                pathname == "/ajusteconsignas"
+            ) {
+                ajustesth_update.value = resp;
+                console.log(resp);
+            }
+            else if (
                 Object.keys(resp).length > 0 &&
                 resp.type == "salidas" &&
                 pathname == "/action"
@@ -213,6 +223,7 @@ const useApp = () => {
         mqtt_activity,
         time_update,
         temperature_update,
+        ajustesth_update,
         salidas_update,
         deleteSession,
         deleteSession,

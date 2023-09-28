@@ -3,11 +3,20 @@
         <p class="text-uppercase fs-sm fw-bold text-center mt-2 mb-4">
             {{ control }}
         </p>
-
+        <a class="block block-rounded block-link-pop" href="javascript:void(0)">
+            <div class="block-content block-content-full d-flex align-items-center justify-content-between">
+                <div class="col-md-4">
+                    <button class="btn btn-info text-white text-uppercase " @click="handleclick('LR')"> <h2> {{ automatico
+                    }}  <i :class="iconautman"></i></h2></button>
+                </div>
+                
+            </div>
+        </a>
         <a class="block block-rounded block-link-pop bg-xinspire-darker" href="javascript:void(0)">
             <div class="block-content block-content-full d-flex align-items-center justify-content-between">
                 <div class="me-3">
-                    <button class="btn btn-warning text-white text-uppercase " @click="handleclick('S1')">Salida 1</button>
+                    <button :disabled="manual" class="btn btn-warning text-white text-uppercase "
+                        @click="handleclick('S1')">Salida 1</button>
                 </div>
                 <div class="item">
                     <i :class="activado1"></i>
@@ -17,7 +26,8 @@
         <a class="block block-rounded block-link-pop bg-xinspire-darker" href="javascript:void(0)">
             <div class="block-content block-content-full d-flex align-items-center justify-content-between">
                 <div class="me-3">
-                    <button class="btn btn-warning text-white text-uppercase " @click="handleclick('S2')">Salida 2</button>
+                    <button :disabled="manual" class="btn btn-warning text-white text-uppercase "
+                        @click="handleclick('S2')">Salida 2</button>
                 </div>
                 <div class="item">
                     <i :class="activado2"></i>
@@ -27,7 +37,8 @@
         <a class="block block-rounded block-link-pop bg-xinspire-darker" href="javascript:void(0)">
             <div class="block-content block-content-full d-flex align-items-center justify-content-between">
                 <div class="me-3">
-                    <button class="btn btn-warning text-white text-uppercase " @click="handleclick('S3')">Salida 3</button>
+                    <button :disabled="manual" class="btn btn-warning text-white text-uppercase "
+                        @click="handleclick('S3')">Salida 3</button>
                 </div>
                 <div class="item">
                     <i :class="activado3"></i>
@@ -37,7 +48,8 @@
         <a class="block block-rounded block-link-pop bg-xinspire-darker" href="javascript:void(0)">
             <div class="block-content block-content-full d-flex align-items-center justify-content-between">
                 <div class="me-3">
-                    <button class="btn btn-warning text-white text-uppercase " @click="handleclick('S4')">Salida 4</button>
+                    <button :disabled="manual" class="btn btn-warning text-white text-uppercase "
+                        @click="handleclick('S4')">Salida 4</button>
                 </div>
                 <div class="item">
                     <i :class="activado4"></i>
@@ -47,40 +59,22 @@
         <a class="block block-rounded block-link-pop bg-xinspire-darker" href="javascript:void(0)">
             <div class="block-content block-content-full d-flex align-items-center justify-content-between">
                 <div class="me-3">
-                    <button class="btn btn-warning text-white text-uppercase " @click="handleclick('A1')">Actuador1</button>
+                    <button :disabled="manual" class="btn btn-warning text-white text-uppercase"
+                        @click="handleclick('A1')">Actuador1</button>
                 </div>
                 <div class="item">
                     <i :class="actuador1"></i>
                 </div>
             </div>
-        </a>        
+        </a>
         <a class="block block-rounded block-link-pop bg-xinspire-darker" href="javascript:void(0)">
             <div class="block-content block-content-full d-flex align-items-center justify-content-between">
                 <div class="me-3">
-                    <button class="btn btn-warning text-white text-uppercase " @click="handleclick('A2')">Actuador2</button>
+                    <button :disabled="manual" class="btn btn-warning text-white text-uppercase "
+                        @click="handleclick('A2')">Actuador2</button>
                 </div>
                 <div class="item">
                     <i :class="actuador2"></i>
-                </div>
-            </div>
-        </a>
-        <a class="block block-rounded block-link-pop bg-xinspire-darker" href="javascript:void(0)">
-            <div class="block-content block-content-full d-flex align-items-center justify-content-between">
-                <div class="me-3">
-                    <button class="btn btn-warning text-white text-uppercase " @click="handleclick('LV')">Led Verde</button>
-                </div>
-                <div class="item">
-                    <i :class="ledverde"></i>
-                </div>
-            </div>
-        </a>
-        <a class="block block-rounded block-link-pop bg-xinspire-darker" href="javascript:void(0)">
-            <div class="block-content block-content-full d-flex align-items-center justify-content-between">
-                <div class="me-3">
-                    <button class="btn btn-warning text-white text-uppercase " @click="handleclick('LR')">Led Rojo</button>
-                </div>
-                <div class="item">
-                    <i :class="ledrojo"></i>
                 </div>
             </div>
         </a>
@@ -119,10 +113,11 @@ export default {
             ACTUADOR2_STATUS: false,
             LEDVERDE_STATUS: false,
             LEDROJO_STATUS: false,
-            BOTON_STATUS: false
+            BOTON_STATUS: false,
+            AUTOMATIC: false
         })
 
-        
+
 
         // Cuando se monte el componente
         onMounted(() => {
@@ -202,14 +197,14 @@ export default {
                 status = action.value.SALIDA2_STATUS
                 console.log("status S2")
                 console.log(action.value.SALIDA2_STATUS)
-                
+
             }
             if (valor == "S3") {
                 action.value.SALIDA3_STATUS = !action.value.SALIDA3_STATUS
                 status = action.value.SALIDA3_STATUS
                 console.log("status S3")
                 console.log(action.value.SALIDA3_STATUS)
-               
+
             }
             if (valor == "S4") {
                 action.value.SALIDA4_STATUS = !action.value.SALIDA4_STATUS
@@ -244,7 +239,7 @@ export default {
             command(`{"protocol": "WS", "output": "${valor}", "value": ${status} }`)
             console.log(valor)
             //return !action.value.SALIDA1_STATUS
-            
+
 
         }
 
@@ -281,6 +276,15 @@ export default {
             !action.value.LEDROJO_STATUS
             return action.value.LEDROJO_STATUS ? "fa fa-4x fa-lightbulb text-success" : "fa fa-2x fa-lightbulb text-danger"
         })
+        const automatico = computed(() => {
+            return action.value.LEDROJO_STATUS ? "manual" : "automatico"
+        })
+        const manual = computed(() => {
+            return action.value.LEDROJO_STATUS ? false : true
+        })
+        const iconautman = computed(() => {
+            return action.value.LEDROJO_STATUS ?  "fa fa-2x fa-hand-rock text-danger" : "fa fa-2x fa-play-circle text-warning"
+        })
         //Actualizar los datos de temperatura y humedad recibidos por ws (websockets)
         watch(() => salidas_update.value,
             ({ SALIDA1_STATUS, SALIDA2_STATUS, SALIDA3_STATUS, SALIDA4_STATUS, ACTUADOR1_STATUS, ACTUADOR2_STATUS, LEDROJO_STATUS, LEDVERDE_STATUS }) => {
@@ -305,6 +309,9 @@ export default {
             ledverde,
             ledrojo,
             handleclick,
+            automatico,
+            manual,
+            iconautman,
 
         }
 

@@ -26,6 +26,9 @@ let action_js = ""
 let action_js_length = 0
 let temperature_js = ""
 let temperature_js_length = 0
+let ajustesth_js = ""
+let ajustesth_js_length = 0
+
 
     // Archivos CSS
 let dashmix_css = ""
@@ -135,6 +138,14 @@ promises.push(fs.readFileAsync("./dist/js/temperature.js.gz", 'hex')
     temperature_js_length = length
     return Promise.resolve()
 }))
+//ajustesth
+promises.push(fs.readFileAsync("./dist/js/ajustesth.js.gz", 'hex')
+    .then((data) => {
+        let { newData, length } = convertToHex(data)
+        ajustesth_js = newData
+        ajustesth_js_length = length
+        return Promise.resolve()
+    }))
 promises.push(fs.readFileAsync("./dist/css/dashmix.min.css.gz", 'hex')
     .then((data) => {
         let { newData, length } = convertToHex(data)
@@ -197,7 +208,9 @@ finally(() => {
             #define action_js_length ${action_js_length}
             const uint8_t action_js[] PROGMEM = {${action_js}}; 
             #define temperature_js_length ${temperature_js_length}
-            const uint8_t temperature_js[] PROGMEM = {${temperature_js}};          
+            const uint8_t temperature_js[] PROGMEM = {${temperature_js}};
+            #define ajustesth_js_length ${ajustesth_js_length}
+            const uint8_t ajustesth_js[] PROGMEM = {${ajustesth_js}};
             #define dashmix_css_length ${dashmix_css_length}
             const uint8_t dashmix_css[] PROGMEM = {${dashmix_css}};
             #define fa_regular_woff2_length ${fa_regular_woff2_length}

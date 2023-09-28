@@ -31,13 +31,13 @@
 
     import Hero from "@/components/common/Hero.vue"
 
-    import Relay from "@/components/action/Relays.vue"
+    import Relay from "@/components/ajustesth/Consignas.vue"
 
-    name: "Relays"
+    name: "Consignas"
 
-    const title = "Control de Salidas"
-    const page = "Automatico/Manual"
+    const title = "Consignas T/H"
+    const page = "Consignas Temp/Hum"
 
-    const control = "Activación Salidas"
+    const control = "Valores de Regulación"
 
 </script>

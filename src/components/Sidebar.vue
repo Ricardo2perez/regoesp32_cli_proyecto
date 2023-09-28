@@ -63,15 +63,21 @@
                         </router-link>
                     </li>
                     <li class="nav-main-item">
-                        <router-link :to="{ name: 'action' }" :class="action">
-                            <i class="nav-main-link-icon fa fa-gamepad"></i>
-                            <span class="nav-main-link-name">Salidas</span>
-                        </router-link>
-                    </li>
-                    <li class="nav-main-item">
                         <router-link :to="{ name: 'temperature' }" :class="temperature">
                             <i class="nav-main-link-icon fa fa-thermometer-half"></i>
                             <span class="nav-main-link-name">Temperatura</span>
+                        </router-link>
+                    </li>
+                    <li class="nav-main-item">
+                        <router-link :to="{ name: 'regulacion' }" :class="regulacion">
+                            <i class="nav-main-link-icon fa fa-sort"></i>
+                            <span class="nav-main-link-name">Regulacion T/H</span>
+                        </router-link>
+                    </li> 
+                    <li class="nav-main-item">
+                        <router-link :to="{ name: 'action' }" :class="action">
+                            <i class="nav-main-link-icon fa fa-gamepad"></i>
+                            <span class="nav-main-link-name">Aut/Man</span>
                         </router-link>
                     </li>
                     <li class="nav-main-heading">Acciones</li>
@@ -152,7 +158,9 @@ export default {
         const temperature = computed(()=>{
         return route.path == '/temperature' ? 'nav-main-link active' : 'nav-main-link'
         })
-
+        const regulacion = computed(()=>{
+        return route.path == '/ajustesconsignas' ? 'nav-main-link active' : 'nav-main-link'
+        })
 
         return {
             index,
@@ -162,6 +170,7 @@ export default {
             time,
             action,
             temperature,
+            regulacion,
             showAlertConfirm
         }
 
