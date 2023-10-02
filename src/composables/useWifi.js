@@ -163,7 +163,7 @@ const useWifi = (props, { emit }) => {
     } */
 
     const wifi_ip_static = computed(() => {
-        return wifi.value.wifi_ip_static ? "Si" : "No"
+        return wifi.value.wifi_ip_static ? "No" : "Si"
     })
     const ap_mode = computed(() => {
         return wifi.value.ap_mode ? "Si" : "No"
