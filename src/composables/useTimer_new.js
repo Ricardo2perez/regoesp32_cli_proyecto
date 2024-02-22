@@ -11,9 +11,9 @@ const useTimer = ()=>{
     } = useApp()
 
     const time = ref({
-        time_ajuste: true,
+        time_ajuste: 1,
         time_date: "",
-        time_z_horaria: "",
+        time_z_horaria: "1",
         time_server: "",
     })
     
@@ -94,7 +94,16 @@ const useTimer = ()=>{
 
     // Computadas
     const time_ajuste = computed(() => {
-        return time.value.time_ajuste ? "Manualmente" : "Optener automáticamente desde el Internet"
+        if (time.time_ajuste == 0){
+            return "obtener automáticamente desde Internet"
+        }
+        if (time.time_ajuste == 1){
+            return "Manualmente"
+        }
+        if (time.time_ajuste == 2){
+            return "Rtc PCF8523"
+        }
+
     })
 
     return{

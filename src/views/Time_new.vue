@@ -20,12 +20,18 @@
                                     <div class="form-group">
                                         <label class="form-label" for="time_ajuste">Ajustar Fecha y Hora:</label>
                                         <div class="form-check form-switch">
-                                            <input class="form-check-input" id="time_ajuste" type="checkbox" v-model="time.time_ajuste">
+                                            <!--<input class="form-check-input" id="time_ajuste" type="checkbox" v-model="time.time_ajuste"> -->
+                                            <select class="form-select" id="time_z_horaria" name="time_z_horaria" v-model.number="time.time_ajuste">
+                                                <option value="0">Servidor NTP</option>
+                                                <option value="1">Rtc Interno ESP32</option>
+                                                <option value="2">Rtc PCF8523</option>   
+                                            </select> 
+                                            
                                             <label class="form-check-label" for="time_ajuste">{{time_ajuste}}</label>
                                         </div>
                                     </div>
                                 </div>             
-                                <div class="mb-2" v-if="time.time_ajuste">                                           
+                                <div class="mb-2" v-if="time.time_ajuste == 1">                                           
                                     <div class="form-group col-md-6 mb-2">   
                                         <div class="form-group">                    
                                             <label class="form-label ml-5" for="time_date">Fecha y Hora (DD/MM/AAAA HH-MM): </label> 
@@ -33,7 +39,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="mb-2" v-else>
+                                <div class="mb-2" v-if="time.time_ajuste == 0">
                                     <div class="form-group col-md-8 mb-3">   
                                         <div class="form-group">                    
                                             <label class="form-label ml-5" for="time_z_horaria">Zona Horaria:</label> 
@@ -81,7 +87,15 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>                                                                
+                                </div>   
+                                <div class="mb-2" v-if="time.time_ajuste == 2">                                           
+                                    <div class="form-group col-md-6 mb-2">   
+                                        <div class="form-group">                    
+                                            <label class="form-label ml-5" for="time_date">Fecha y Hora (DD/MM/AAAA HH-MM): </label> 
+                                            <input type="datetime-local" class="form-control" id="time_date" v-model="time.time_date">
+                                        </div>
+                                    </div>
+                                </div>                                                             
                                 <div class="mb-2 mt-1">
                                     <button type="submit" class="btn btn-alt-success me-1">
                                         <i class="fa fa-fw fa-save opacity-50 me-1"></i> Guardar
